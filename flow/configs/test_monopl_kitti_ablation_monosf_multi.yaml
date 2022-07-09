@@ -1,0 +1,58 @@
+ckpt_dir: test_results/ablation_monosf_multi_kitti
+resume: /mnt/fire/runfa/SM3D/multi-mono-sf/checkpoints/checkpoint_kitti_selfsup.ckpt
+data_root: /mnt/universe/DataSet/FlyingThings3D_subset/KITTI/flow_2015/
+depth_checkpoint_path: /mnt/fire/runfa/SM3D/bts/pytorch/models/09_18_alllevel/model-183500-best_d1_0.95980
+evaluate: True
+
+unsymmetric: True
+
+arch: MonoSceneFlow_Multi
+last_relu: False
+allow_less_points: True
+
+use_leaky: True
+bcn_use_bias: True
+bcn_use_norm: True
+
+conv_padding_mode: "zeros"
+correlation_cuda_enabled: False
+calculate_disparity_scale: False
+
+batch_size: 1
+
+scales_filter_map:  [[1., 1, 1, 1],
+                     [0.5, 1, 1, 1],
+                     [0.25, 1, 1, 1],
+                     [0.125, 1, 1, 1]]
+
+dim: 3
+num_points: 8192
+
+
+DEVICE: cuda
+
+dataset: KITTI_monopl_self
+remove_ground: True
+
+data_process:
+  DEPTH_THRESHOLD: 80.
+  NO_CORR: True
+
+print_freq: 1
+workers: 8
+
+min_depth_eval: 0.001
+max_depth_eval: 80.
+
+
+
+
+
+
+
+
+
+
+
+
+

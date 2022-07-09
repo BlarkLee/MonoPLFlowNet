@@ -1,0 +1,32 @@
+--mode train
+--model_name eval_kitti_result
+--encoder densenet121_bts
+--dataset kitti
+--data_path //mnt/universe/DataSet/FlyingThings3D_subset/KITTI/KITTI_raw
+--gt_path //mnt/universe/DataSet/FlyingThings3D_subset/KITTI/depth/train
+--filenames_file data_index/eigen_train_files_with_gt.txt
+--checkpoint_path /mnt/fire/runfa/SM3D/bts/pytorch/models/09_18_alllevel/model-183500-best_d1_0.95980 
+--batch_size 6
+--num_epochs 50
+--learning_rate 1e-4
+--weight_decay 1e-2
+--adam_eps 1e-3
+--num_threads 1
+--input_height 352
+--input_width 704
+--max_depth 80
+--do_kb_crop
+--do_random_rotate
+--degree 1.0
+--log_directory ./models/
+
+--log_freq 100
+--eval_freq 500
+--do_online_eval
+--data_path_eval //mnt/universe/DataSet/FlyingThings3D_subset/KITTI/KITTI_raw
+--gt_path_eval //mnt/universe/DataSet/FlyingThings3D_subset/KITTI/depth/val
+--filenames_file_eval data_index/eigen_test_files_with_gt.txt
+--min_depth_eval 1e-3
+--max_depth_eval 80
+--eval_summary_directory ./models/eval/
+--garg_crop
