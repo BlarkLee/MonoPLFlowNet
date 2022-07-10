@@ -71,11 +71,13 @@ cd models; python3 build_khash_cffi.py; cd ..
 python main_train_fly.py arguments_train_fly.txt
 
 
-#### Train DepthNet on KITTI: 
+### Train DepthNet on KITTI: 
 python main_train_kitti.py arguments_train_kitti.txt
 
 ### Train MonoPLFlowNet on Flyingthings3D:
+`
 python monopl_main_semi_flyingthings3d.py configs/train_monopl_semi.yaml
+`
 
 Note that we don't train MonoPLFlowNet on KITTI, we only train it on Flyingthings3D while evaluating directly on KITTI. We train DepthNet on KITTI only for the sake of depth evaluation on KITTI, not for scene flow purpose.
 
@@ -86,11 +88,14 @@ We shared our trained models from anonymous cloud drive for your evaluation purp
 
 
 ### Evaluate Depth
+```
 python main_eval_kitti.py arguments_eval_kitti.txt
 python main_eval_fly.py arguments_eval_fly.txt
+```
 
 
 ### Evaluate Scene Flow
+```
 python monopl_main_semi_flyingthings3d.py configs/test_monopl_flyingthings3d.yaml
 python monopl_main_semi_kitti.py configs/test_monopl_kitti.yaml
 python monopl_main_semi_kitti_ablation_expansion.py configs/test_monopl_kitti_ablation_expansion.yaml
@@ -99,6 +104,7 @@ python monopl_main_semi_flyingthings3d_ablation_monosf.py configs/test_monopl_fl
 python monopl_main_semi_kitti_ablation_monosf.py configs/test_monopl_kitti_ablation_monosf.yaml
 python monopl_main_semi_kitti_ablation_monosf_multi.py configs/test_monopl_kitti_ablation_monosf_multi.yaml
 python monopl_main_semi_flyingthings3d_ablation_monosf_multi.py configs/test_monopl_flyingthings3d_ablation_monosf_multi.yaml
+```
 
 ## Acknowledgments
 Thanks for the contribution from "HPLFlowNet" - https://github.com/laoreja/HPLFlowNet and "BTS" - https://github.com/cleinc/bts. 
