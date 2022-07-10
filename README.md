@@ -24,7 +24,7 @@ Scene flow visualization is rotated to the view better showing our estimation in
 
 ## Prepare Environments
 We recommend to use anaconda to prepare environments for this work. Our work is trained and tested under
-
+```
 Ubuntu 18.04
 Python 3.7.3
 Nvidia GPU + CUDA CuDNN 10.0
@@ -32,7 +32,7 @@ Pytorch 1.2.0
 Numba 0.53.0
 OpenCV 3.4.2
 cffi 1.14.5
-
+```
 
 ## Dataset Preparation (check paper section 4 Experiments to see the details of datasets)
 In this work, we use two datasets， KITTI and Flyingthings3D.
@@ -47,15 +47,15 @@ We use Flyingthings3D for training and evaluation of both depth and scene flow e
 We use KITTI Eigen's split for training and evaluation of depth estimation:
 download from http://www.cvlibs.net/download.php?file=data_depth_annotated.zip, run
 ```
-$ cd ~/workspace/dataset/kitti_dataset
-$ aria2c -x 16 -i ../../bts/utils/kitti_archives_to_download.txt
-$ parallel unzip ::: \*.zip
+cd ~/workspace/dataset/kitti_dataset
+aria2c -x 16 -i ../../bts/utils/kitti_archives_to_download.txt
+parallel unzip ::: \*.zip
 ```
 
 ### Prepare scene flow data, run
 We use KITTI Flow 2015 split for training and evaluation of scene flow estimation. Download from https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html, and unzip to the directory RAW_DATA_PATH SAVE_PATH
 
-`$ python data_preprocess/process_kitti.py RAW_DATA_PATH SAVE_PATH/KITTI_processed_noground_crop`
+`python data_preprocess/process_kitti.py RAW_DATA_PATH SAVE_PATH/KITTI_processed_noground_crop`
 
 
 ## Training
