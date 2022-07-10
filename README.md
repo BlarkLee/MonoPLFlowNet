@@ -18,7 +18,7 @@ With a perfect 3D Scene Flow estimation, points in red should be overlapped as m
 ### KITTI Dataset:
 With two consecutive monocular RGB images as the only input, MonoPLFlowNet jointly estimate depth (upper video) and 3D scene flow (lower video). Please watch carefully on the depth change, Scene flow visualization is rotated to the street-side view rather than original camera view to better visualize our estimation in **3D Real Scale**.
 
-![](https://raw.githubusercontent.com/BlarkLee/MonoPLFlowNet/main/kitti_dynamic_3.gif)
+![](https://raw.githubusercontent.com/BlarkLee/MonoPLFlowNet/figures/kitti_dynamic_3.gif)
 ### Flyingthings3D Dataset:
 Scene flow visualization is rotated to the view better showing our estimation in **3D Real Scale**.
 
