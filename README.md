@@ -1,10 +1,6 @@
 # MonoPLFlowNet: Permutohedral Lattice FlowNet for Real-Scale 3D Scene Flow Estimation with Monocular Images
 This is the offical repository for the implementation of our MonoPLFlowNet published on ECCV 2022. Preprint version is available at https://arxiv.org/abs/2111.12325 .
 
-## Abstract
-Real-scale scene flow estimation has become increasingly important for 3D computer vision. Some works successfully estimate real-scale 3D scene flow with LiDAR. However, these ubiquitous and expensive sensors are still unlikely to be equipped widely for real application. Other works use monocular images to estimate scene flow, but their scene flow estimations are normalized with scale ambiguity, where additional depth or point cloud ground truth are required to recover the real scale. Even though they perform well in 2D, these works do not provide accurate and reliable 3D estimates. We present a deep learning architecture on permutohedral lattice - MonoPLFlowNet. Different from all previous works, our MonoPLFlowNet is the first work where only two consecutive monocular images are used as input, while both depth and 3D scene flow are estimated in real scale. Our real-scale scene flow estimation outperforms all state-of-the-art monocular-image based works recovered to real scale by ground truth, and is comparable to LiDAR approaches. As a by-product, our real-scale depth estimation also outperforms other state-of-the-art works.
-
-
 ## Overview
  ![Image text](https://raw.githubusercontent.com/BlarkLee/MonoPLFlowNet/main/figures/overview.png)
 With only two consecutive monocular images (left) as input, our MonoPLFlowNet estimates
@@ -27,7 +23,7 @@ Scene flow visualization is rotated to the view better showing our estimation in
 # Code
 
 ## Prepare Environments
-We highly recommend to use anaconda to prepare environments for this work. Our work is trained and tested under
+We recommend to use anaconda to prepare environments for this work. Our work is trained and tested under
 
 Ubuntu 18.04
 Python 3.7.3
@@ -39,52 +35,53 @@ cffi 1.14.5
 
 
 ## Dataset Preparation (check paper section 4 Experiments to see the details of datasets)
-We use two datasets for both training and evaluation in our work, KITTI Dataset and Flyingthings3D Dataset. Make sure you have enough space to store the datasets. 
+In this work, we use two datasets， KITTI and Flyingthings3D.
 
 ### Prepare Flyingthings3D Dataset:
-We use Flyingthings3D for training and evaluation of both depth and scene flow estimation.  please download  and unzip "RGB images (cleanpass)", "Disparity", "Disparity change", "Optical flow", "Disparity Occlusions", "Flow Occlusions" from "DispNet/FlowNet2.0 dataset subsets". They will be unzipped at the same directory, the disparity map is originally in the dataset, to prepare scene flow data, run
+We use Flyingthings3D for training and evaluation of both depth and scene flow estimation. Download  and unzip "RGB images (cleanpass)", "Disparity", "Disparity change", "Optical flow", "Disparity Occlusions", "Flow Occlusions" from "DispNet/FlowNet2.0 dataset subsets". They will be unzipped at the same directory, the disparity map is originally in the dataset, to prepare scene flow data, run
 
-$ python data_preprocess/process_flyingthings3d_subset.py --raw_data_path RAW_DATA_PATH --save_path SAVE_PATH/FlyingThings3D_subset_processed_35m --only_save_near_pts
+`python data_preprocess/process_flyingthings3d_subset.py --raw_data_path RAW_DATA_PATH --save_path SAVE_PATH/FlyingThings3D_subset_processed_35m --only_save_near_pts`
 
 
 ### Prepare KITTI Dataset:
 We use KITTI Eigen's split for training and evaluation of depth estimation:
-download from http://www.cvlibs.net/download.php?file=data_depth_annotated.zip, 
-
-### Prepare depth data, run
+download from http://www.cvlibs.net/download.php?file=data_depth_annotated.zip, run
+```
 $ cd ~/workspace/dataset/kitti_dataset
 $ aria2c -x 16 -i ../../bts/utils/kitti_archives_to_download.txt
-$ parallel unzip ::: *.zip
-
-We use KITTI Flow 2015 split for training and evaluation of scene flow estimation:
-download from https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html, and unzip to the directory RAW_DATA_PATH SAVE_PATH
+$ parallel unzip ::: \*.zip
+```
 
 ### Prepare scene flow data, run
-$ python data_preprocess/process_kitti.py RAW_DATA_PATH SAVE_PATH/KITTI_processed_noground_crop 
+We use KITTI Flow 2015 split for training and evaluation of scene flow estimation. Download from https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html, and unzip to the directory RAW_DATA_PATH SAVE_PATH
+
+`$ python data_preprocess/process_kitti.py RAW_DATA_PATH SAVE_PATH/KITTI_processed_noground_crop`
 
 
 ## Training
-Since the permutohedral lattice is written in hash table, please setup the model first:
-cd models; python3 build_khash_cffi.py; cd ..
+Setup the model:
+```
+cd models; 
+python3 build_khash_cffi.py; 
+cd ..
+```
 
 ### Train DepthNet on Flyingthings3D: 
-python main_train_fly.py arguments_train_fly.txt
+`python main_train_fly.py arguments_train_fly.txt`
 
 
 ### Train DepthNet on KITTI: 
-python main_train_kitti.py arguments_train_kitti.txt
+`python main_train_kitti.py arguments_train_kitti.txt`
 
 ### Train MonoPLFlowNet on Flyingthings3D:
-`
-python monopl_main_semi_flyingthings3d.py configs/train_monopl_semi.yaml
-`
+`python monopl_main_semi_flyingthings3d.py configs/train_monopl_semi.yaml`
 
 Note that we don't train MonoPLFlowNet on KITTI, we only train it on Flyingthings3D while evaluating directly on KITTI. We train DepthNet on KITTI only for the sake of depth evaluation on KITTI, not for scene flow purpose.
 
 
 
 ## Evaluation
-We shared our trained models from anonymous cloud drive for your evaluation purposes, download our trained models and models for ablation study from https://drive.google.com/drive/folders/1MWX6ekn3k5JYeY3WIGo_QDo6thVTFX5B?usp=sharing. Find the .yaml file under /flow/configs/ and /depth/ to change the model path to your download directory. Specifically, the tag "resume" corresponds to  the scene flow model, while the tag "depth_checkpoint_path" corresponds to the depth model.
+Download our trained models for evaluation and ablation study from https://drive.google.com/drive/folders/1MWX6ekn3k5JYeY3WIGo_QDo6thVTFX5B?usp=sharing. Find the `.yaml` file under `/flow/configs/ and /depth/`, change the model path to your download path. Specifically, the tag "resume" corresponds to  the scene flow model, while the tag "depth_checkpoint_path" corresponds to the depth model.
 
 
 ### Evaluate Depth
