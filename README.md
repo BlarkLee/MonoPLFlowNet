@@ -9,7 +9,6 @@ title="MonoPLFlowNet: Permutohedral Lattice FlowNet for Real-Scale 3D Scene Flo
 booktitle="Proceedings of the European Conference on Computer Vision (ECCV)",
 year="2022",
 publisher="Springer Nature Switzerland",
-address="Cham",
 pages="322--339"
 }
 ```
