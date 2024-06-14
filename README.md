@@ -1,18 +1,6 @@
 # MonoPLFlowNet: Permutohedral Lattice FlowNet for Real-Scale 3D Scene Flow Estimation with Monocular Images
 This is the offical repository for the implementation of our MonoPLFlowNet published on ECCV 2022. Preprint version is available at https://arxiv.org/abs/2111.12325 .
 
-## Citation
-```
-@InProceedings{MonoPLFlowNet,
-author={Li, Runfa and Nguyen, Truong},
-title="MonoPLFlowNet: Permutohedral Lattice FlowNet for Real-Scale 3D Scene Flow Estimation with Monocular Images",
-booktitle="Proceedings of the European Conference on Computer Vision (ECCV)",
-year="2022",
-publisher="Springer Nature Switzerland",
-pages="322--339"
-}
-```
-
 ## Overview
  ![Image text](https://raw.githubusercontent.com/BlarkLee/MonoPLFlowNet/main/figures/overview.png)
 With only two consecutive monocular images (left) as input, our MonoPLFlowNet estimates
@@ -113,6 +101,18 @@ python monopl_main_semi_flyingthings3d_ablation_monosf.py configs/test_monopl_fl
 python monopl_main_semi_kitti_ablation_monosf.py configs/test_monopl_kitti_ablation_monosf.yaml
 python monopl_main_semi_kitti_ablation_monosf_multi.py configs/test_monopl_kitti_ablation_monosf_multi.yaml
 python monopl_main_semi_flyingthings3d_ablation_monosf_multi.py configs/test_monopl_flyingthings3d_ablation_monosf_multi.yaml
+```
+
+## Citation
+```
+@InProceedings{MonoPLFlowNet,
+author={Li, Runfa and Nguyen, Truong},
+title="MonoPLFlowNet: Permutohedral Lattice FlowNet for Real-Scale 3D Scene Flow Estimation with Monocular Images",
+booktitle="Proceedings of the European Conference on Computer Vision (ECCV)",
+year="2022",
+publisher="Springer Nature Switzerland",
+pages="322--339"
+}
 ```
 
 ## Acknowledgments
