@@ -1,5 +1,5 @@
 # MonoPLFlowNet: Permutohedral Lattice FlowNet for Real-Scale 3D Scene Flow Estimation with Monocular Images
-This is the offical repository for the implementation of our MonoPLFlowNet published on ECCV 2022. Preprint version is available at https://arxiv.org/abs/2111.12325 .
+This is the offical repository for the implementation MonoPLFlowNet https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136870316.pdf. https://arxiv.org/abs/2111.12325 .
 
 ## Overview
  ![Image text](https://raw.githubusercontent.com/BlarkLee/MonoPLFlowNet/main/figures/overview.png)
